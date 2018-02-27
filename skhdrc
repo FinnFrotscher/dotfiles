@@ -1,0 +1,50 @@
+# enter fullscreen mode for the focused container
+ctrl - f : chunkc tiling::window --toggle fullscreen
+
+# change focus between tiling / floating windows
+shift + ctrl - space : chunkc tiling::window --toggle float
+
+# change layout of desktop
+ctrl - e : chunkc tiling::desktop --layout bsp
+ctrl - s : chunkc tiling::desktop --layout monocle
+
+# change focus
+ctrl - h : chunkc tiling::window --focus west
+ctrl - j : chunkc tiling::window --focus south
+ctrl - k : chunkc tiling::window --focus north
+ctrl - l : chunkc tiling::window --focus east
+ctrl - p : chunkc tiling::window --focus prev
+ctrl - n : chunkc tiling::window --focus next
+
+# move focused window
+shift + ctrl - h : chunkc tiling::window --warp west
+shift + ctrl - j : chunkc tiling::window --warp south
+shift + ctrl - k : chunkc tiling::window --warp north
+shift + ctrl - l : chunkc tiling::window --warp east
+
+
+# move focused container to workspace
+shift + ctrl - p : chunkc tiling::window --send-to-desktop prev; chunkc tiling::monitor -f prev
+shift + ctrl - n : chunkc tiling::window --send-to-desktop next; chunkc tiling::monitor -f next
+shift + ctrl - 1 : chunkc tiling::window --send-to-desktop 1
+shift + ctrl - 2 : chunkc tiling::window --send-to-desktop 2
+shift + ctrl - 3 : chunkc tiling::window --send-to-desktop 3
+shift + ctrl - 4 : chunkc tiling::window --send-to-desktop 4
+shift + ctrl - 5 : chunkc tiling::window --send-to-desktop 5
+shift + ctrl - 6 : chunkc tiling::window --send-to-desktop 6
+
+# increase region size
+shift + ctrl - q : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
+shift + ctrl - w : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
+shift + ctrl - e : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
+shift + ctrl - r : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
+
+# decrease region size
+shift + ctrl - a: chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
+shift + ctrl - s: chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
+shift + ctrl - d: chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
+shift + ctrl - f: chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
+
+# change focus between tiling / floating windows
+shift + ctrl - space : chunkc tiling::window --toggle float
+
