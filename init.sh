@@ -25,3 +25,6 @@ ln -s ~/dotfiles/chunkwmrc ~/.chunkwmrc
 ln -s ~/dotfiles/skhdrc ~/.skhdrc
 
 alias vim="nvim"
+
+tmux source-file ~/.tmux.conf
+

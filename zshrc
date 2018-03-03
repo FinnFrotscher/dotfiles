@@ -120,12 +120,13 @@ alias git status='nocorrect git status'
 
 
 # antigen
-if [[ ! -f ~/.antigen.zsh ]]; then
-  curl https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.antigen.zsh
-fi
-source ~/.antigen.zsh
+source $(brew --prefix)/share/antigen/antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle git
 
+
+#pyenv
+eval "$(pyenv init -)" 
+eval "$(pyenv virtualenv-init -)"

@@ -2,7 +2,7 @@
 " - Avoid using standard Vim directory names like 'plugin'
 "
 " Set standard file encoding
-set encoding=utf8
+set encoding=utf-8
 " No special per file vim override configs
 set nomodeline
 " Stop word wrapping
@@ -28,8 +28,9 @@ set hlsearch
 " Space above/beside cursor from screen edges
 set scrolloff=1
 set sidescrolloff=5
-
-nmap <F6> :NERDTreeToggle<CR>
+" set the language
+set langmenu=en_US.UTF-8
+set noswapfile
 
 " remove Mouse
 set mouse=r
@@ -44,23 +45,29 @@ imap <right> <nop>
 " Open previous file
 nmap <Leader><Leader> <c-^>
 
-
+" Capture Shift Alt Tab
+"<esc>^Y
 " tab between buffers
-nnoremap <Tab> :bnext!<CR>
-nnoremap <S-Tab> :bprev!<CR>
+nnoremap <M-}> :bnext!<CR>
+nnoremap <M-{> :bprev!<CR>
+
 
 " map Leader to Space
 let mapleader="\<SPACE>"
 
-color Dracula
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
+
+Plug 'christoomey/vim-tmux-navigator'
+
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/unite.vim'
+Plug 'SirVer/ultisnips'
 Plug 'w0rp/ale'
 Plug 'justinmk/vim-sneak'
+
+Plug 'Shougo/unite.vim'
 Plug 'dracula/vim'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
@@ -68,26 +75,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
 Plug 'mhinz/vim-grepper'
-
+Plug 'matze/vim-move'
 call plug#end()
 
-" autocomplete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" sneaking
-let g:sneak#s_next = 1
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-
-
-" File Explorer
-map \ :VimFiler -explorer<CR>
-map 1 :VimFilerCurrentDir -explorer -find<CR>
+" Set Theme 
+color Dracula
 
 " Grepper Find in Files
 nnoremap <Leader>fp :Grepper<Space>-query<Space>
@@ -101,9 +93,43 @@ let g:indentLine_char = "⟩"
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 set laststatus=2
+set guifont=Fira\ Mono\ for\ Powerline
 
-" fuzzy file search
+" Fuzzy Find
 nnoremap <Leader>p :CtrlP<CR>
 
+" deoplete autocomplete
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" UltiSnip
+let g:UltiSnipsExpandTrigger="<S-CR>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" Nerdtree
+autocmd vimenter * NERDTree
+nnoremap <Leader>\ :NERDTreeToggle<Enter>
+"autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+"let NERDTreeQuitOnOpen = 1
 
 
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
+
+" Sneaks
+let g:sneak#s_next = 1
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+
+" python pyenv
+let g:python3_host_prog = '/Users/Finn/.pyenv/versions/neovim3/bin/python'
