@@ -12,7 +12,7 @@ set nowrap
 " Adjust system undo levels
 set undolevels=100
 " Use system clipboard
-set clipboard=unnamed
+" set clipboard=unnamed
 " Set tab width and convert tabs to spaces
 set tabstop=2
 set softtabstop=2
@@ -22,7 +22,8 @@ set expandtab
 set conceallevel=1
 set noerrorbells
 " Number gutter
-set number
+set number                     " Show current line number
+set relativenumber             " Show relative line numbers
 " Use search highlighting
 set hlsearch
 " Space above/beside cursor from screen edges
@@ -42,14 +43,14 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
+nnoremap <Leader>r :source $MYVIMRC<CR>
+
 " Open previous file
 nmap <Leader><Leader> <c-^>
 
-" Capture Shift Alt Tab
-"<esc>^Y
 " tab between buffers
-nnoremap <M-}> :bnext!<CR>
-nnoremap <M-{> :bprev!<CR>
+nnoremap <C-]> :bnext!<CR>
+nnoremap <C-[> :bprev!<CR>
 
 
 " map Leader to Space
@@ -61,6 +62,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-surround'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips'
@@ -77,6 +79,9 @@ Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
 Plug 'mhinz/vim-grepper'
 Plug 'matze/vim-move'
 call plug#end()
+
+" Autopairs
+let g:AutoPairsFlyMode = 1
 
 " Set Theme 
 color Dracula
@@ -97,7 +102,12 @@ set guifont=Fira\ Mono\ for\ Powerline
 
 " Fuzzy Find
 nnoremap <Leader>p :CtrlP<CR>
-
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  'node_modules\|\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 " deoplete autocomplete
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
