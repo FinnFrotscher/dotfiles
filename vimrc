@@ -53,6 +53,8 @@ nnoremap <C-]> :bnext!<CR>
 nnoremap <C-[> :bprev!<CR>
 
 
+" map write to leader w
+nnoremap <Leader>w :w<CR>
 " map Leader to Space
 let mapleader="\<SPACE>"
 
@@ -63,11 +65,14 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'w0rp/ale'
 Plug 'justinmk/vim-sneak'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
+Plug 'skywind3000/asyncrun.vim'
 
 Plug 'Shougo/unite.vim'
 Plug 'dracula/vim'
@@ -80,6 +85,19 @@ Plug 'mhinz/vim-grepper'
 Plug 'matze/vim-move'
 call plug#end()
 
+" ALE
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+" eslint with prettier
+autocmd BufWritePost *.js AsyncRun -post=checktime eslint --fix %
+let g:ale_linters = {}
+let g:ale_linters.javascript = ['eslint']
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['prettier']
+let g:ale_javascript_prettier_use_global = 1
+nnoremap <Leader>d :ALEFix<CR> 
+
 " Autopairs
 let g:AutoPairsFlyMode = 1
 
@@ -89,6 +107,7 @@ color Dracula
 " Grepper Find in Files
 nnoremap <Leader>fp :Grepper<Space>-query<Space>
 nnoremap <Leader>fb :Grepper<Space>-buffers<Space>-query<Space>-<Space>
+
 
 " Indent Lines
 let g:indentLine_enabled = 1
@@ -108,9 +127,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
-" deoplete autocomplete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" YouCompleteMe
 
 " UltiSnip
 let g:UltiSnipsExpandTrigger="<S-CR>"
@@ -120,6 +138,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " Nerdtree
 autocmd vimenter * NERDTree
 nnoremap <Leader>\ :NERDTreeToggle<Enter>
+nnoremap <Leader>/ :NERDTreeFind<CR>
 "autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
