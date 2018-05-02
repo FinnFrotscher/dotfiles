@@ -1,0 +1,39 @@
+snippet sbc "Storybook Component" b
+import React, { Component } from "react"
+import { storiesOf, action, linkTo } from "@kadira/storybook"
+import ${1} from "../../../src/imports/${2}"
+${0}
+storiesOf("${3}", module)
+	.add("${1}", () => <${1} />)
+endsnippet 
+
+snippet roc "React Mobx-Observer Component" b
+import React, { Component} from 'react';
+import PropTypes from 'prop-types';
+import { observer } from "mobx-react"
+
+import ${3} from "./${3}"
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<div className="${2}">
+				$5
+			</div>
+		);
+	}
+}
+
+export default observer(() => (
+	<${1}
+		store={${3}}
+		${4}={${3}.{${4}}
+	/>
+))
+
+endsnippet
+

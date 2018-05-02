@@ -46,3 +46,17 @@ shift + alt - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-windo
 # change focus between tiling / floating windows
 shift + ctrl - space : chunkc tiling::window --toggle float
 
+# focus monitor
+# ctrl + alt - p  : chunkc tiling::monitor -f prev
+# ctrl + alt - n  : chunkc tiling::monitor -f next
+# ctrl + alt - 1  : chunkc tiling::monitor -f 1
+# ctrl + alt - 2  : chunkc tiling::monitor -f 2
+# ctrl + alt - 3  : chunkc tiling::monitor -f 3
+ 
+# send window to monitor and follow focus
+# cmd + alt - p  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
+# cmd + alt - n  : chunkc tiling::window --send-to-monitor next; chunkc tiling::monitor -f next
+# cmd + alt - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
+# cmd + alt - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
+# cmd + alt - 3  : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
+

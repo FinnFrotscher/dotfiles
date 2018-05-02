@@ -1,6 +1,159 @@
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 "
+
+" map Leader to Space
+let mapleader="\<SPACE>"
+
+" map write to leader w
+nnoremap <Leader>w :w<CR>
+
+" map buffer close to leader bq 
+nnoremap <Leader>bd :bd<CR>
+
+" map PlugInstall to leader s 
+" nnoremap <Leader>s :PlugInstall<CR>
+
+" Source vimrc on leader r
+nnoremap <Leader>r :source $MYVIMRC<CR>
+
+" Open previous file
+nmap <Leader><Leader> <c-^>
+
+" tab between buffers
+nnoremap <M-.> :bnext!<CR>
+nnoremap <M-,> :bprev!<CR>
+inoremap ii <Esc>
+
+"Plugins
+call plug#begin('~/.local/share/nvim/plugged')
+
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
+Plug 'jistr/vim-nerdtree-tabs'
+
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-surround'
+Plug 'Valloric/YouCompleteMe'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'epilande/vim-es2015-snippets'
+Plug 'epilande/vim-react-snippets'
+
+Plug 'mattn/emmet-vim'
+
+Plug 'w0rp/ale'
+Plug 'justinmk/vim-sneak'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'jistr/vim-nerdtree-tabs'
+	
+Plug 'skywind3000/asyncrun.vim'
+
+Plug 'Shougo/unite.vim'
+Plug 'dracula/vim'
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
+Plug 'mhinz/vim-grepper'
+Plug 'matze/vim-move'
+Plug 'tpope/vim-fugitive'
+Plug 'cakebaker/scss-syntax.vim'
+call plug#end()
+
+" Nerdtree
+autocmd vimenter * NERDTree
+" nnoremap <Leader>\ :NERDTreeToggle<Enter>
+" nnoremap <Leader>/ :NERDTreeFind<CR>
+"autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+"let NERDTreeQuitOnOpen = 1
+"
+" NerdTree Tabs
+map <Leader>\  <plug>NERDTreeTabsToggle<CR>
+map <Leader>/ <plug>NERDTreeTabsFind<CR>
+
+" ALE
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+" eslint with prettier
+autocmd BufWritePost *.js AsyncRun -post=checktime eslint --fix %
+let g:ale_linters = {}
+let g:ale_linters.javascript = ['eslint']
+let g:ale_linters.scss = ['stylelint']
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['prettier']
+let g:ale_fixers.scss = ['prettier','stylelint']
+let g:ale_javascript_prettier_use_global = 1
+nnoremap <Leader>d :ALEFix<CR> 
+
+" Autopairs
+let g:AutoPairsFlyMode = 1
+
+" Grepper Find in Files
+nnoremap <Leader>fp :Grepper<Space>-query<Space>
+nnoremap <Leader>fb :Grepper<Space>-buffers<Space>-query<Space>
+
+" Indent Lines
+let g:indentLine_enabled = 1
+let g:indentLine_char = "⟩"
+
+" airline settings
+let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=1
+set laststatus=2
+set guifont=Fira\ Mono\ for\ Powerline
+
+" Emmet 
+let g:user_emmet_leader_key='<C-n>'
+
+" Fuzzy Find
+nnoremap <Leader>p :CtrlP<CR>
+nnoremap <C-p> :CtrlP<CR>
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  'node_modules\|\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+" YouCompleteMe
+let g:ycm_key_eist_select_completion = ['<TAB>', '<Down>', '<C-j>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+
+" UltiSnip
+let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsExpandTrigger="<C-l>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+
+
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
+
+" Sneaks
+let g:sneak#s_next = 1
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+
+" python pyenv
+let g:python3_host_prog = '/Users/Finn/.pyenv/versions/neovim3/bin/python'
+
+
+" Set Theme 
+color Dracula
+
 " Set standard file encoding
 set encoding=utf-8
 " No special per file vim override configs
@@ -43,122 +196,3 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
-nnoremap <Leader>r :source $MYVIMRC<CR>
-
-" Open previous file
-nmap <Leader><Leader> <c-^>
-
-" tab between buffers
-nnoremap <C-]> :bnext!<CR>
-nnoremap <C-[> :bprev!<CR>
-
-
-" map write to leader w
-nnoremap <Leader>w :w<CR>
-" map Leader to Space
-let mapleader="\<SPACE>"
-
-
-call plug#begin('~/.local/share/nvim/plugged')
-
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
-
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe'
-Plug 'SirVer/ultisnips'
-Plug 'w0rp/ale'
-Plug 'justinmk/vim-sneak'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-
-Plug 'skywind3000/asyncrun.vim'
-
-Plug 'Shougo/unite.vim'
-Plug 'dracula/vim'
-Plug 'Yggdroot/indentLine'
-Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
-Plug 'mhinz/vim-grepper'
-Plug 'matze/vim-move'
-call plug#end()
-
-" ALE
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-" eslint with prettier
-autocmd BufWritePost *.js AsyncRun -post=checktime eslint --fix %
-let g:ale_linters = {}
-let g:ale_linters.javascript = ['eslint']
-let g:ale_fixers = {}
-let g:ale_fixers.javascript = ['prettier']
-let g:ale_javascript_prettier_use_global = 1
-nnoremap <Leader>d :ALEFix<CR> 
-
-" Autopairs
-let g:AutoPairsFlyMode = 1
-
-" Set Theme 
-color Dracula
-
-" Grepper Find in Files
-nnoremap <Leader>fp :Grepper<Space>-query<Space>
-nnoremap <Leader>fb :Grepper<Space>-buffers<Space>-query<Space>-<Space>
-
-
-" Indent Lines
-let g:indentLine_enabled = 1
-let g:indentLine_char = "⟩"
-
-" airline settings
-let g:airline#extensions#tabline#enabled=1
-let g:airline_powerline_fonts=1
-set laststatus=2
-set guifont=Fira\ Mono\ for\ Powerline
-
-" Fuzzy Find
-nnoremap <Leader>p :CtrlP<CR>
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  'node_modules\|\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-" YouCompleteMe
-
-" UltiSnip
-let g:UltiSnipsExpandTrigger="<S-CR>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" Nerdtree
-autocmd vimenter * NERDTree
-nnoremap <Leader>\ :NERDTreeToggle<Enter>
-nnoremap <Leader>/ :NERDTreeFind<CR>
-"autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-"let NERDTreeQuitOnOpen = 1
-
-
-" Use ctrl-[hjkl] to select the active split!
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
-
-" Sneaks
-let g:sneak#s_next = 1
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-
-" python pyenv
-let g:python3_host_prog = '/Users/Finn/.pyenv/versions/neovim3/bin/python'
