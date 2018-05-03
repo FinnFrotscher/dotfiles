@@ -8,10 +8,10 @@ let mapleader="\<SPACE>"
 " map write to leader w
 nnoremap <Leader>w :w<CR>
 
-" map buffer close to leader bq 
+" map buffer close to leader bq
 nnoremap <Leader>bd :bd<CR>
 
-" map PlugInstall to leader s 
+" map PlugInstall to leader s
 " nnoremap <Leader>s :PlugInstall<CR>
 
 " Source vimrc on leader r
@@ -21,9 +21,8 @@ nnoremap <Leader>r :source $MYVIMRC<CR>
 nmap <Leader><Leader> <c-^>
 
 " tab between buffers
-nnoremap <M-.> :bnext!<CR>
-nnoremap <M-,> :bprev!<CR>
-inoremap ii <Esc>
+nnoremap <Leader>] :bnext!<CR>
+nnoremap <Leader>[ :bprev!<CR>
 
 "Plugins
 call plug#begin('~/.local/share/nvim/plugged')
@@ -46,7 +45,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'jistr/vim-nerdtree-tabs'
-	
+
 Plug 'skywind3000/asyncrun.vim'
 
 Plug 'Shougo/unite.vim'
@@ -88,7 +87,7 @@ let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['prettier']
 let g:ale_fixers.scss = ['prettier','stylelint']
 let g:ale_javascript_prettier_use_global = 1
-nnoremap <Leader>d :ALEFix<CR> 
+nnoremap <Leader>d :ALEFix<CR>
 
 " Autopairs
 let g:AutoPairsFlyMode = 1
@@ -107,7 +106,7 @@ let g:airline_powerline_fonts=1
 set laststatus=2
 set guifont=Fira\ Mono\ for\ Powerline
 
-" Emmet 
+" Emmet
 let g:user_emmet_leader_key='<C-n>'
 
 " Fuzzy Find
@@ -151,7 +150,7 @@ omap F <Plug>Sneak_F
 let g:python3_host_prog = '/Users/Finn/.pyenv/versions/neovim3/bin/python'
 
 
-" Set Theme 
+" Set Theme
 color Dracula
 
 " Set standard file encoding
@@ -195,4 +194,3 @@ imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
-

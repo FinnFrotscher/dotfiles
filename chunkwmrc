@@ -1,25 +1,11 @@
 #!/bin/bash
 
-#
-# NOTE: specify the absolutepath to the directory to use when
-#       loading a plugin. '~' expansion is supported.
-#
-
 chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
-
-#
-# NOTE: if enabled, chunkwm will monitor the specified plugin_dir
-#       and automatically reload any '.so' file that is changed.
-#
 
 chunkc core::hotload 1
 chunkc core::unload tiling.so
 chunkc core::unload ffm.so
 chunkc core::unload border.so
-
-#
-# NOTE: the following are config variables for the chunkwm-tiling plugin.
-#
 
 chunkc set global_desktop_mode           bsp
 chunkc set 2_desktop_mode                monocle
