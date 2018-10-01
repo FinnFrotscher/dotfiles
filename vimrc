@@ -1,6 +1,5 @@
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-"
+" python pyenv
+let g:python3_host_prog = '/Users/Finn/.pyenv/shims/python3'
 
 " map Leader to Space
 let mapleader="\<SPACE>"
@@ -12,10 +11,12 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>bd :bd<CR>
 
 " map PlugInstall to leader s
-" nnoremap <Leader>s :PlugInstall<CR>
+nnoremap <Leader>i :PlugInstall<CR>
 
 " Source vimrc on leader r
 nnoremap <Leader>r :source $MYVIMRC<CR>
+
+map <Leader>bl :Bufferlist<CR>
 
 " Open previous file
 nmap <Leader><Leader> <c-^>
@@ -24,11 +25,18 @@ nmap <Leader><Leader> <c-^>
 nnoremap <Leader>] :bnext!<CR>
 nnoremap <Leader>[ :bprev!<CR>
 
+" Resize
+nnoremap <silent> <Leader>+ :resize +10<CR>
+nnoremap <silent> <Leader>- :resize -10<CR>
+nnoremap <silent> <Leader>< :vertical resize -10<CR>
+nnoremap <silent> <Leader>> :vertical resize +10<CR>
+
 "Plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'sandeepcr529/Buffet.vim'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
@@ -37,8 +45,10 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-es2015-snippets'
 Plug 'epilande/vim-react-snippets'
+Plug 'jparise/vim-graphql' 
 
 Plug 'mattn/emmet-vim'
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 
 Plug 'w0rp/ale'
 Plug 'justinmk/vim-sneak'
@@ -49,7 +59,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'skywind3000/asyncrun.vim'
 
 Plug 'Shougo/unite.vim'
-Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'Dracula' }
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
@@ -59,7 +69,15 @@ Plug 'mhinz/vim-grepper'
 Plug 'matze/vim-move'
 Plug 'tpope/vim-fugitive'
 Plug 'cakebaker/scss-syntax.vim'
+
 call plug#end()
+
+" Set Theme
+color Dracula
+syntax on
+set termguicolors
+
+
 
 " Nerdtree
 autocmd vimenter * NERDTree
@@ -71,21 +89,28 @@ let NERDTreeDirArrows = 1
 "let NERDTreeQuitOnOpen = 1
 "
 " NerdTree Tabs
-map <Leader>\  <plug>NERDTreeTabsToggle<CR>
+map <Leader>\ <plug>NERDTreeTabsToggle<CR>
 map <Leader>/ <plug>NERDTreeTabsFind<CR>
 
 " ALE
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:ale_lint_on_enter = 1 " Less distracting when opening a new file
 " eslint with prettier
 autocmd BufWritePost *.js AsyncRun -post=checktime eslint --fix %
 let g:ale_linters = {}
 let g:ale_linters.javascript = ['eslint']
+let g:ale_linters.graphql = ['eslint']
 let g:ale_linters.scss = ['stylelint']
+let g:ale_linters.css = ['stylelint']
+let g:ale_linters.python = ['yapf']
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['prettier']
-let g:ale_fixers.scss = ['prettier','stylelint']
+let g:ale_fixers.graphql = ['prettier']
+let g:ale_fixers.json = ['prettier']
+let g:ale_fixers.scss = ['prettier']
+let g:ale_fixers.css = ['prettier']
+let g:ale_fixers.python = ['yapf']
 let g:ale_javascript_prettier_use_global = 1
 nnoremap <Leader>d :ALEFix<CR>
 
@@ -146,12 +171,8 @@ xmap F <Plug>Sneak_F
 omap f <Plug>Sneak_f
 omap F <Plug>Sneak_F
 
-" python pyenv
-let g:python3_host_prog = '/Users/Finn/.pyenv/versions/neovim3/bin/python'
 
 
-" Set Theme
-color Dracula
 
 " Set standard file encoding
 set encoding=utf-8
