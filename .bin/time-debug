@@ -1,0 +1,4 @@
+systemctl status systemd-timedated
+systemctl start ntpd
+sudo ntpd -qg
+https://unix.stackexchange.com/questions/60772/i-messed-up-my-system-clock-in-arch-linux

@@ -1,0 +1,2 @@
+#!/bin/sh
+chromium-browser --remote-debugging-port=9229 chrome://inspect/#devices

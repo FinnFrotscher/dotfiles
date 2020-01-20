@@ -1,0 +1,7 @@
+#!/bin/bash
+FILE=$1
+cd ~/.bin/
+echo '#!/bin/sh' > $FILE
+chmod 755 $FILE
+jumpbin
+

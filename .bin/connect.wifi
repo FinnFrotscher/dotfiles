@@ -1,0 +1,5 @@
+#!/bin/sh
+# LIST AVAILABLE OPTIONS
+nmcli d wifi list
+# connect to one
+nmcli d wifi connect $WIFI password $PASSWORD

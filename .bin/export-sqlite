@@ -1,0 +1,1 @@
+sqlite-json prod-db.sqlite3 SELECT prod-db.sqlite3 tmp.json FROM post > tmp.json

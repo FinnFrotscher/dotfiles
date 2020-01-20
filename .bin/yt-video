@@ -1,0 +1,4 @@
+#!/bin/sh
+FILE=$1
+youtube-dl --format mp4 -f 'bestvideo+bestaudio' $FILE
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+duplicity incremental ~ file:///media/finn/Storage/linux-backup/ 
+

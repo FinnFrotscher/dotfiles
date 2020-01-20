@@ -1,0 +1,5 @@
+#!/bin/sh
+redshift &
+echo "Redshift"
+echo "find screen with xrandr"
+echo "config located at ~/.config/redshift.config"

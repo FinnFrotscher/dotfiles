@@ -1,0 +1,5 @@
+#! /bin/bash
+
+nmcli n off
+sudo service network-manager restart
+nmcli n on

@@ -1,0 +1,4 @@
+#!/bin/bash
+BOOLEAN=$1
+sudo pm-powersave $BOOLEAN
+

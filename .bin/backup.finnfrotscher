@@ -1,0 +1,33 @@
+#!/bin/bash
+
+mkdir ~/.backup
+mkdir ~/.backup/finnfrotscher
+
+rsync -avP \
+ --numeric-ids \
+ finnfrotscher.com:/srv/ \
+ ~/.backup/finnfrotscher/srv
+
+rsync -avP \
+ --numeric-ids \
+ finnfrotscher.com:/opt/ \
+ ~/.backup/finnfrotscher/opt
+
+rsync -avP \
+ --numeric-ids \
+ finnfrotscher.com:~/.ssh/ \
+ ~/.backup/finnfrotscher/.ssh
+
+rsync -avP \
+ --numeric-ids \
+ finnfrotscher.com:~/.docker/ \
+ ~/.backup/finnfrotscher/.docker
+
+tar -cvf ~/.backup/finnfrotscher.tar ~/.backup/finnfrotscher
+
+rm -rf ~/.backup/finnfrotscher/
+
+ #--include='/opt' \
+ #--include='/srv' \
+ #--include='~/.ssh' \
+ #--include='~/.docker' \

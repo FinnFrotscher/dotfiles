@@ -1,0 +1,6 @@
+#!/bin/sh
+PORT=$1
+sudo kill $(lsof -t -i:$PORT)
+# alternative
+sudo netstat -peanut | grep ":27017 "
+

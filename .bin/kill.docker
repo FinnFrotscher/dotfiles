@@ -1,0 +1,3 @@
+#!/bin/sh
+sudo pkill docker
+sudo service docker restart

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+STRING=$1
+grep -rnw '/' -e $STRING

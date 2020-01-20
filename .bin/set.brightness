@@ -1,0 +1,7 @@
+#!/bin/sh
+
+BRIGHTNESS=$1
+#echo "for reference: " $BRIGHTNESS
+#xrandr -q | grep " connected"
+xrandr --output eDP-1 --brightness $BRIGHTNESS
+
